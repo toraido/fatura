@@ -1,0 +1,162 @@
+@page {
+    size: A4;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 14px;
+    background: #fff;
+    color: #666;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.fatura-invoice {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.fatura-header {
+    padding: 20px 40px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.fatura-void-notice-top {
+    color: rgba(250, 0, 0, 0.5);
+    font-size: 48px;
+    position: absolute;
+    margin: 0 auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 50px;
+}
+
+.fatura-void-notice-center {
+    color: rgba(250, 0, 0, 0.5);
+    font-size: 48px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    height: 50px;
+}
+
+.fatura-void-notice-bottom {
+    color: rgba(250, 0, 0, 0.5);
+    font-size: 48px;
+    position: absolute;
+    margin: 0 auto;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 50px;
+}
+
+.fatura-title-biggest {
+    color: #333;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.fatura-title-big {
+    color: #333;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.fatura-title-medium {
+    color: #333;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.fatura-title-small {
+    color: #333;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.fatura-body {
+    padding: 40px;
+}
+
+.fatura-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style: none;
+    margin: 0 0 0 -40px;
+}
+
+.fatura-grid > * {
+    margin: 0;
+    padding-left: 40px;
+}
+
+.fatura-grid > * > :last-child {
+    margin-bottom: 0;
+}
+
+.fatura-width-1-2 {
+    width: 50%;
+}
+
+.fatura-width-1-4 {
+    width: 25%;
+}
+
+.fatura-items {
+    margin: 20px 0;
+    padding: 40px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.fatura-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+}
+
+.fatura-table > tr:not(:first-child),
+.fatura-table > :not(:first-child) > tr,
+.fatura-table > :first-child > tr:not(:first-child) {
+    border-top: 1px solid #e5e5e5;
+}
+
+.fatura-table th {
+    padding: 16px 12px;
+    text-align: left;
+    vertical-align: bottom;
+    width: 25%;
+}
+
+.fatura-table td {
+    padding: 16px 12px;
+    vertical-align: top;
+}
+
+.fatura-table td > :last-child {
+    margin-bottom: 0;
+}

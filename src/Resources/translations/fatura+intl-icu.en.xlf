@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>invoice.void</source>
+                <target>THIS INVOICE IS VOID AND IS NOT LEGALLY BINDING.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>invoice.title</source>
+                <target>Invoice {reference}</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>invoice.from</source>
+                <target>From</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>invoice.for</source>
+                <target>For</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>invoice.reference</source>
+                <target>Reference</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>invoice.issued_at</source>
+                <target>Issued at</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>invoice.due_at</source>
+                <target>Due at</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>invoice.terms</source>
+                <target>Terms</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>invoice.terms_value</source>
+                <target>{terms} Days</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>invoice.items</source>
+                <target>Items</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>invoice.item.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>invoice.item.unit_price</source>
+                <target>Unit Price</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>invoice.item.quantity</source>
+                <target>Quantity</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>invoice.item.amount</source>
+                <target>Amount</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>invoice.note</source>
+                <target>Note</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>invoice.total</source>
+                <target>Total</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>invoice.subtotal</source>
+                <target>Subtotal</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>invoice.discount</source>
+                <target>Discount</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>invoice.subtotal_including_discount</source>
+                <target>Subtotal Discounted</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>invoice.taxes</source>
+                <target>Taxes</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>invoice.total_amount</source>
+                <target>Total</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

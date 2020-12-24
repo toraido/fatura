@@ -1,0 +1,135 @@
+{% extends "@ToraidoFatura/layout.html.twig" %}
+
+{% block content %}
+    <div class="fatura-invoice">
+        {% if invoice.void %}
+            <p class="fatura-void-notice-top">{{ 'invoice.void'| trans({}, 'fatura') }}</p>
+            <p class="fatura-void-notice-center">{{ 'invoice.void'|trans({}, 'fatura') }}</p>
+            <p class="fatura-void-notice-bottom">{{ 'invoice.void'|trans({}, 'fatura') }}</p>
+        {% endif %}
+        <div class="fatura-header">
+            <h1 class="fatura-title-biggest">{{ 'invoice.title'|trans({reference: invoice.reference}, 'fatura') }}</h1>
+        </div>
+        <div class="fatura-body">
+            <div class="fatura-grid">
+                <div class="fatura-width-1-2">
+                    <h2 class="fatura-title-big">{{ 'invoice.from'|trans({}, 'fatura') }}</h2>
+                    <h3 class="fatura-business-name">{{ invoice.business.name }}</h3>
+                    <small class="fatura-business-identifier">{{ invoice.business.identifier }}</small>
+                    <p>{{ invoice.business.address.street }}</p>
+                    <p>{{ invoice.business.address.city }}, {{ invoice.business.address.country }}</p>
+                    <p>{{ invoice.business.address.postal }}</p>
+                </div>
+                <div class="fatura-width-1-2">
+                    <h2 class="fatura-title-big">{{ 'invoice.for'|trans({}, 'fatura') }}</h2>
+                    <h3 class="fatura-customer-name">{{ invoice.customer.name }}</h3>
+                    <small class="fatura-customer-identifier">{{ invoice.customer.identifier }}</small>
+                    <p>{{ invoice.customer.address.street }}</p>
+                    <p>{{ invoice.customer.address.city }}, {{ invoice.customer.address.country }}</p>
+                    <p>{{ invoice.customer.address.postal }}</p>
+                </div>
+            </div>
+            <div class="fatura-grid">
+                <div class="fatura-width-1-4">
+                    <h3 class="fatura-title-medium">{{ 'invoice.reference'|trans }}</h3>
+                    <p>{{ invoice.reference }}</p>
+                </div>
+                <div class="fatura-width-1-4">
+                    <h3 class="fatura-title-medium">{{ 'invoice.issued_at'|trans({}, 'fatura') }}</h3>
+                    <p>{{ invoice.issueDate.date.format('d/m/Y') }}</p>
+                </div>
+                <div class="fatura-width-1-4">
+                    <h3 class="fatura-title-medium">{{ 'invoice.due_at'|trans({}, 'fatura') }}</h3>
+                    <p>{{ invoice.issueDate.dueAt.format('d/m/Y') }}</p>
+                </div>
+                <div class="fatura-width-1-4">
+                    <h3 class="fatura-title-medium">{{ 'invoice.terms'|trans({}, 'fatura') }}</h3>
+                    <p>{{ 'invoice.terms_value'|trans({terms: invoice.issueDate.terms}, 'fatura') }}</p>
+                </div>
+            </div>
+
+            <div class="fatura-items">
+                <h2 class="fatura-title-big">{{ 'invoice.items'|trans({}, 'fatura') }}</h2>
+                <table class="fatura-table ">
+                    <thead>
+                    <tr>
+                        <th><span class="fatura-title-medium">{{ 'invoice.item.description'|trans({}, 'fatura') }}</span></th>
+                        <th><span class="fatura-title-medium">{{ 'invoice.item.unit_price'|trans({}, 'fatura') }}</span></th>
+                        <th><span class="fatura-title-medium">{{ 'invoice.item.quantity'|trans({}, 'fatura') }}</span></th>
+                        <th><span class="fatura-title-medium">{{ 'invoice.item.amount'|trans({}, 'fatura') }}</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in invoice.items %}
+                        <tr>
+                            <td><span>{{ item.description }}</span></td>
+                            <td><span>{{ fatura_format(item.unitPrice, invoice.currency) }}</span></td>
+                            <td><span>{{ item.quantity }}</span></td>
+                            <td>
+                                <span>{{ fatura_format(item.unitPrice.multiply(item.quantity), invoice.currency) }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="fatura-grid">
+                <div class="fatura-width-1-2">
+                    <h2 class="fatura-title-big">{{ 'invoice.note'|trans({}, 'fatura') }}</h2>
+                    <p>{{ invoice.note }}</p>
+                </div>
+                <div class="fatura-width-1-2">
+                    <h2 class="fatura-title-big">{{ 'invoice.total'|trans({}, 'fatura') }}</h2>
+                    <table class="fatura-table">
+                        <tbody>
+                        <tr>
+                            <td colspan="3"><span class="fatura-title-medium">{{ 'invoice.subtotal'|trans({}, 'fatura') }}</span></td>
+                            <td><span>{{ fatura_format(invoice.subtotal, invoice.currency) }}</span></td>
+                        </tr>
+                        {% for discount in invoice.discounts %}
+                            <tr>
+                                <td colspan="3"><span class="fatura-title-medium">{{ discount.description|trans({}, 'fatura') }}</span></td>
+                                <td>
+                                    <span>{{ fatura_format(discount.amount(invoice.subtotal), invoice.currency) }}</span>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3"><span class="fatura-title-medium">{{ 'invoice.discount'|trans({}, 'fatura') }}</span></td>
+                                <td><span>N/A</span></td>
+                            </tr>
+                        {% endfor %}
+                        {% if invoice.discounts %}
+                            <tr>
+                                <td colspan="3"><span class="fatura-title-medium">{{ 'invoice.subtotal_including_discount'|trans({}, 'fatura') }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ fatura_format(invoice.subtotalIncludingDiscounts, invoice.currency) }}</span>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% for tax in invoice.taxes %}
+                            <tr>
+                                <td colspan="3"><span class="fatura-title-medium">{{ tax.description|trans({}, 'fatura') }}</span></td>
+                                <td>
+                                    <span>{{ fatura_format(tax.amount(invoice.subtotalIncludingDiscounts), invoice.currency) }}</span>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3"><span class="fatura-title-medium">{{ 'invoice.taxes'|trans({}, 'fatura') }}</span></td>
+                                <td><span>N/A</span></td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3"><span class="fatura-title-medium">{{ 'invoice.total_amount'|trans({}, 'fatura') }}</span></td>
+                            <td><span>{{ fatura_format(invoice.total, invoice.currency) }}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

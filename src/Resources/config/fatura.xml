@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Toraido\Fatura\Fatura" class="Toraido\Fatura\Fatura" public="true">
+            <argument type="service" id="Twig\Environment"/>
+            <argument type="service" id="Toraido\Fatura\Convertor\Convertor" />
+            <argument type="service" id="Toraido\Fatura\Naming\Namer" />
+        </service>
+
+        <service id="Toraido\Fatura\Convertor\SnappyConvertor" class="Toraido\Fatura\Convertor\SnappyConvertor">
+            <argument type="service" id="knp_snappy.pdf" />
+        </service>
+
+        <service id="Toraido\Fatura\Convertor\Convertor" alias="Toraido\Fatura\Convertor\SnappyConvertor" />
+
+        <service id="Toraido\Fatura\Naming\ReferenceNamer" class="Toraido\Fatura\Naming\ReferenceNamer" />
+        <service id="Toraido\Fatura\Naming\Namer" alias="Toraido\Fatura\Naming\ReferenceNamer" />
+
+        <service id="Toraido\Fatura\Formatter\IntlFormatter" class="Toraido\Fatura\Formatter\IntlFormatter">
+            <argument/> <!-- locale -->
+        </service>
+
+        <service id="Toraido\Fatura\Formatter\Formatter" alias="Toraido\Fatura\Formatter\IntlFormatter"/>
+
+        <service id="Toraido\Fatura\Twig\FormatterExtension" class="Toraido\Fatura\Twig\FormatterExtension">
+            <argument type="service" id="Toraido\Fatura\Formatter\Formatter"/>
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>
